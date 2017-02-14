@@ -1,0 +1,51 @@
+[
+  {
+    "imgsrc":"images/json_01.jpg",
+    "discount":1.9,
+    "attr":"唐狮tonlion男装专场",
+    "remain":6
+  },
+  {
+    "imgsrc":"images/json_02.jpg",
+    "discount":0.8,
+    "attr":"丝柏舍女装移动端专场",
+    "remain":3
+  },
+  {
+    "imgsrc":"images/json_03.jpg",
+    "discount":3.3,
+    "attr":"糖力TAMMY TANGS原创设计师简...",
+    "remain":9
+  },
+  {
+    "imgsrc":"images/json_04.jpg",
+    "discount":1.2,
+    "attr":"索菲丝尔裤子专场",
+    "remain":10
+  },            {
+  "imgsrc":"images/json_01.jpg",
+  "discount":1.9,
+  "attr":"唐狮tonlion男装专场",
+  "remain":6
+},
+  {
+    "imgsrc":"images/json_02.jpg",
+    "discount":0.8,
+    "attr":"丝柏舍女装移动端专场",
+    "remain":3
+  },
+  {
+    "imgsrc":"images/json_03.jpg",
+    "discount":3.3,
+    "attr":"糖力TAMMY TANGS原创设计师简...",
+    "remain":9
+  },
+  {
+    "imgsrc":"images/json_04.jpg",
+    "discount":1.2,
+    "attr":"索菲丝尔裤子专场",
+    "remain":10
+  }
+
+
+]

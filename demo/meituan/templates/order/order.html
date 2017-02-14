@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-header-bar>
+        <button class="button button-icon ion-ios-minus"
+                ng-click="config.showDelete=!config.showDelete;"></button>
+        <div class="title">订单</div>
+
+    </ion-header-bar>
+    <ion-content class="has-footer">
+        <ion-list>
+            <ion-item class="button block icon icon-right">
+                <h2 style="display:inline-block; float: left;line-height: 45px;">我的订单</h2>
+                <p style="float: right;">全部订单 <i class="icon ion-chevron-right"></i></p>
+            </ion-item>
+            <ion-item style="height: 50px; padding:0;">
+                <ion-tabs class="tabs-light tabs-icon-top">
+                    <ion-tab title="待付款" class="calm" icon="ion-card">
+                    </ion-tab>
+                    <ion-tab title="待使用" class="assertive" icon="ion-email-unread">
+                    </ion-tab>
+                    <ion-tab title="待评价" class="energized" icon="ion-chatbox-working">
+                    </ion-tab>
+                    <ion-tab title="退款/售后" class="royal" icon="ion-social-yen-outline">
+                    </ion-tab>
+                </ion-tabs>
+            </ion-item>
+            <p style="background-color: #CCCCCC; height: 30px; line-height: 20px; padding: 5px 12px; margin: 0">
+                最近的订单</p>
+            <ion-list show-delete="config.showDelete">
+                <ion-item class="item-remove-animate item-thumbnail-left" style="padding:0"
+                          ng-repeat="item in orders track by $index">
+                    <img ng-src="{{item.imgsrc}}">
+                    <h2 style="font-size: 25px; font-weight: bold;" class="title">{{item.name}}</h2>
+                    <time style="font-size: 12px; color: #CCCCCC">下单时间：{{item.time}}</time>
+                    <p style="font-size: 16px; color:#0f0f0f;">总价：{{item.value | currency:"￥"}}</p>
+                    <div style="position: absolute; right: 12px; top: 12px; color: lawngreen;">{{item.state}}</div>
+                    <button class="button button-outline button-assertive"
+                            style="position: absolute;right: 12px; bottom: 12px;">再来一单
+                    </button>
+                    <ion-delete-button class="button button-icon ion-minus-circled"
+                                       ng-click="remove(item)"></ion-delete-button>
+                </ion-item>
+            </ion-list>
+            <button ng-click="loadMore()" class="button button-clear button-icon-right button-block button-balanced">更多
+                <i class="ion-chevron-down"></i></button>
+        </ion-list>
+    </ion-content>
+</ion-view>

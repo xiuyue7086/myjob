@@ -1,0 +1,141 @@
+<ion-view>
+    <ion-header-bar class="bar-balanced item-input-inset" style="overflow: visible;">
+        <button class="light button button-icon icon-right ion-android-arrow-dropdown">上海</button>
+        <div class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="请输入搜索关键字"/>
+        </div>
+        <div class="buttons">
+            <button class="button light button-icon ion-android-expand" ng-click="now()">
+                <div ng-if="show" id="item" class="list">
+                    <a class="item item-icon-left" style="background-color: #cccccc; padding: 0;height: 42px;line-height: 42px;">
+                        <i class="icon ion-qr-scanner"></i>
+                        扫一扫
+                    </a>
+                    <a class="item item-icon-left" style="background-color: #cccccc; padding: 0;height: 42px;line-height: 42px;">
+                        <i class="icon ion-android-expand"></i>
+                        付款码
+                    </a>
+                </div>
+
+            </button>
+            <button class="button button-clear">
+                <i class="icon light ion-android-notifications-none"></i>
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-slide-box does-continue="true" auto-play="true">
+            <ion-slide>
+                <img src="images/adv1.jpg" width="100%">
+            </ion-slide>
+            <ion-slide>
+                <img src="images/adv2.jpg" width="100%">
+            </ion-slide>
+        </ion-slide-box>
+        <ion-slide-box>
+            <ion-slide style="padding-bottom: 40px; border-bottom: 5px solid #CCCCCC">
+                <ion-tabs class="tabs-light aaa tabs-icon-top">
+                    <ion-tab title="美食" class="energized" icon="ion-android-restaurant">
+                    </ion-tab>
+                    <ion-tab title="电影" class="assertive" icon="ion-ios-film">
+                    </ion-tab>
+                    <ion-tab title=酒店住宿 class="royal" icon="ion-android-home">
+                    </ion-tab>
+                    <ion-tab title="休闲娱乐" class="energized" icon="ion-beer">
+                    </ion-tab>
+                    <ion-tab title="外卖" class="assertive" icon="ion-android-bicycle">
+                    </ion-tab>
+                </ion-tabs>
+                <ion-tabs class="tabs-light aaa tabs-icon-top">
+                    <ion-tab title="春运/火车票" class="calm" icon="ion-android-plane">
+                    </ion-tab>
+                    <ion-tab title="KTV" class="energized" icon="ion-mic-c">
+                    </ion-tab>
+                    <ion-tab title=周边游 class="calm" icon="ion-android-car">
+                    </ion-tab>
+                    <ion-tab title="丽人/美发" class="assertive" icon="ion-ios-personadd-outline">
+                    </ion-tab>
+                    <ion-tab title="旅游出行" class="balanced" icon="ion-android-bus">
+                    </ion-tab>
+                </ion-tabs>
+            </ion-slide>
+            <ion-slide style="padding-bottom: 40px; border-bottom: 5px solid #CCCCCC ">
+                <ion-tabs class="tabs-light aaa tabs-icon-top">
+                    <ion-tab title="品质酒店" class="energized" icon="ion-ios-home">
+                    </ion-tab>
+                    <ion-tab title="洗浴汗蒸" class="assertive" icon="ion-ios-speedometer">
+                    </ion-tab>
+                    <ion-tab title=生活服务 class="royal" icon="ion-android-wifi">
+                    </ion-tab>
+                    <ion-tab title="母婴亲子" class="energized" icon="ion-android-contacts">
+                    </ion-tab>
+                    <ion-tab title="结婚" class="assertive" icon="ion-heart">
+                    </ion-tab>
+                </ion-tabs>
+                <ion-tabs class="tabs-light aaa tabs-icon-top">
+                    <ion-tab title="景点" class="calm" icon="ion-camera">
+                    </ion-tab>
+                    <ion-tab title="温泉" class="calm" icon="ion-bonfire">
+                    </ion-tab>
+                    <ion-tab title=学习培训 class="balanced" icon="ion-ios-book-outline">
+                    </ion-tab>
+                    <ion-tab title="家装" class="calm" icon="ion-android-options">
+                    </ion-tab>
+                    <ion-tab title="全部分类" class="balanced" icon="ion-android-more-horizontal">
+                    </ion-tab>
+                </ion-tabs>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="row" style="height: 110px;">
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">手机充值</h5>
+                <p class="assertive" style="font-size: 12px">话费流量充值</p>
+                <img src="images/lucky.jpg" width="30" height="30">
+            </button>
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">天天满减</h5>
+                <p class="assertive" style="font-size: 12px">每天都有新优惠</p>
+                <img src="images/lucky1.jpg" width="30" height="30">
+            </button>
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">1元普吉岛</h5>
+                <p class="assertive" style="font-size: 12px">周六送福利</p>
+                <img src="images/lucky2.jpg" width="30" height="30">
+            </button>
+        </div>
+        <div class="row" style="height: 120px; border-bottom: 5px solid #CCCCCC;">
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">强档电影</h5>
+                <p class="energized" style="font-size: 12px">9.9元起预售</p>
+                <img src="images/lucky3.jpg" width="30" height="30">
+            </button>
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">春节好礼</h5>
+                <p class="royal" style="font-size: 12px">学新样当学霸</p>
+                <img src="images/lucky4.png" width="30" height="30">
+            </button>
+            <button class="col button-clear" style="text-align: center;">
+                <h5 style="font-weight: bold">新年特惠</h5>
+                <p class="energized" style="font-size: 12px">畅想品质美食</p>
+                <img src="images/lucky5.jpg" width="30" height="30">
+            </button>
+        </div>
+        <div style="text-align: center; padding:10px 0;border-bottom: 1px solid #CCCCCC">--猜你喜欢--</div>
+        <div class="list has-footer">
+            <ion-refresher pulling-text="下拉刷新" pulling-icon="ion-fork" on-pulling="doRefersh()"></ion-refresher>
+
+            <a class="item item-thumbnail-left" ng-repeat="item in items" style="position: relative;">
+                <img ng-src="{{item.imgsrc}}">
+                <h2>{{item.name}}</h2>
+                <p>{{item.howlong}}</p>
+                <p>{{item.howmuch}}</p>
+                <p>{{item.ps}}</p>
+                <p style="position:absolute; right: 18px; bottom: 18px;">月售：{{item.now}}</p>
+            </a>
+        </div>
+        <ion-infinite-scroll on-infinite="loadMore()" immediate-check="false"></ion-infinite-scroll>
+    </ion-content>
+    <div id="top" ng-click="top()">top</div>
+
+</ion-view>

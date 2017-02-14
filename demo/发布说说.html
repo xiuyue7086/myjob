@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0}
+ul{ list-style:none}
+.wrap{ width:500px;font-size:14px; margin:50px auto}
+.countTxt{ display:block; text-align:right; padding-bottom:10px;}
+.countTxt em{ font-size: 16px; font-weight: bold; font-style: normal; padding: 0 5px}
+.countTxt .red{ color: red;}
+textarea{ padding:10px; display:block; width:480px; resize:none; height:100px; border:1px solid #ccc; font-size:14px}
+.commonBtn{ height:40px; width:100px; border:1px solid #ccc; margin:10px 0 0 380px}
+hr{ margin:20px 0}
+.talkList li{ border:1px solid #ccc; padding:25px 20px 20px; border-radius:10px; position:relative; margin-bottom:20px}
+.talkList li p{min-height:50px; margin-bottom:10px; word-break:break-all}
+.talkList li .toolsBar{ text-align:right}
+.talkList li .toolsBar span{ margin-left:20px; cursor:pointer}
+.talkList li time{ position:absolute; top:10px; right:15px; color:#ccc;}
+</style>
+<script>
+window.onload=function(){
+	//老师写的 纯复制
+	var oTextarea=document.getElementsByTagName('textarea')[0];
+	var countTxt=document.getElementsByClassName('countTxt')[0];
+	var commonBtn=document.getElementsByClassName('commonBtn')[0];
+	var oTalklist=document.getElementsByClassName("talkList")[0];
+	function isChinese(str){  //判断是不是中文
+		var reCh=/[u00-uff]/;  //所有单字节字母
+		return !reCh.test(str);
+	};
+	//isChinese("大")
+	oTextarea.onkeyup=function(){
+		//针对输入的每一个字进行字节数的判断
+		var txtval=oTextarea.value;
+		var str_length=0; //统计字节数 初始定义长度为0
+		for(var i=0;i<txtval.length;i++){
+			if(   isChinese(  txtval.charAt(i)    )    ) {
+				str_length+=2//中文为2个字符
+			}
+			else{
+				 str_length+=1//英文一个字符
+			};
+		};
+		str_length=Math.ceil(str_length/2);//中英文相加除2 向下取整数（一个中文+一个英文）
+		var count=140-str_length;
+		if(count<0){
+			countTxt.innerHTML='超出<em class="red">'+Math.abs(count)+'</em>字';
+			commonBtn.disabled=true;
+		}else{
+			countTxt.innerHTML='您还可以输入<em>'+count+'</em>字';
+			commonBtn.disabled=false;
+		}
+		if(count==140){
+			commonBtn.disabled=true;
+			countTxt.innerHTML='您还可以输入<em>'+count+'</em>字';
+		}
+	}
+	//在commonBtn上绑定点击事件
+	commonBtn.onclick=function(){
+		var oLi=document.createElement("li");  //创建oLi
+		oLi.innerHTML='<p></p><div class="toolsBar"><span>顶 <b>0</b></span><span>踩 <b>0</b></span></div><time>123</time>'; //oLi赋值
+		oTalklist.appendChild(oLi);    //把oLi插入oTalklist
+		var aP=document.getElementsByTagName("p"); //全局内找P标签
+		for(var i=aP.length-1;i>0;i--){				//每次点击P的内容传递下去
+			aP[i].innerHTML=aP[i-1].innerHTML;
+		}
+		var oP=document.getElementsByTagName("p")[0];			//找到全局内的第一个P
+		oP.innerHTML=oTextarea.value;							//给找到的P赋值
+		oTextarea.value=""										//清空文本域
+		count=140;												//把数字计数器拨回140个字（似乎没实现）
+		var oGood=oLi.getElementsByTagName("span")[0];			//在LI中找出顶和踩的按钮，同时找出对应的数字显示
+		var oBad=oLi.getElementsByTagName("span")[1];
+		var oB1=oLi.getElementsByTagName("b")[0]
+		var oB2=oLi.getElementsByTagName("b")[1]
+		oGood.onclick=function(){								//在顶的按钮上绑定函数，点一下 顶的数字显示+1
+			oB1.innerHTML++;
+		}
+		oBad.onclick=function(){								//在踩的按钮上绑定函数，点一下 踩的数字显示+1
+			oB2.innerHTML++;
+		}
+		var aB=document.getElementsByTagName("b")				//找出全局的B标签
+		for(var j=aB.length-1;j>1;j--){							//把B标签的内容传递下去
+			aB[j].innerHTML=aB[j-2].innerHTML;
+		}
+		aB[0].innerHTML=0										//每次新建OLI时 顶和踩的计数器清空
+		aB[1].innerHTML=0
+		var oDate=new Date();									//新建一块表
+		var year=oDate.getFullYear();							//找出当前时间的年月日，月份的数值+1
+		var month=oDate.getMonth()+1;
+		var today=oDate.getDate();
+		var oTime=oLi.getElementsByTagName("time")[0];			//OLI中找出TIME标签
+		oTime.innerHTML=year+"-"+month+"-"+today;				//把年月日按一定的格式塞入TIME标签
+	}
+}
+
+
+</script>
+
+</head>
+
+<body>
+<div class="wrap">
+    <form>
+        <span class="countTxt">您还可以输入<em>140</em>字</span>
+        <textarea></textarea>
+        <button class="commonBtn" disabled type="button">发表说说</button>
+    </form>
+    <hr>
+    <ul class="talkList">
+        <!--<li>
+            <p>adsfa asdf asdf asdf</p>
+            <div class="toolsBar">
+                <span>顶 <b>0</b></span>
+                <span>踩 <b>0</b></span>
+            </div>
+            <time></time>
+        </li>-->
+    
+    </ul>
+
+</div>
+
+
+
+</body>
+</html>

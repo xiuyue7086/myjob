@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function () {
+            // 和socket服务器建立连接，获得客户端的socket对象
+            // 连接服务器。这将从被加载的页面向服务器发送连接请求，
+            // 最终在服务器端socketio中触发connection事件
+            var clientSocket = io();
+
+            var currentCid = null;      // 当前正在发送信息的客户
+            var n;//这玩意用来接收下面要用的index的
+            // 客户端socket监听服务器发过来的消息
+            clientSocket.on("message", function (data) {
+                var type = data.type;   // 提交消息类型
+                var cid = data.cid;     // 获取cid
+                // 根据消息类型，作出相应的处理
+                switch (type) {
+                    case "enter":     // 有新用户连接
+                        // cid显示在列表中
+                        $("#customerList").append('<div class="bg-info customer" data-cid="' + cid + '">客户:' + cid + '</div>');//在客户列表里添加新加入的客户
+                        $("#messages").append('<div class="mes" data-cid="' + cid + '">客户:' + cid + '</div>'); //在对话框列表里 添加新用户唯一对应的对话框
+                        select();//调用函数
+                        break;
+                    case "leave":     // 有用户离开
+                        // 获取cid，从列表中删除
+                        $("#customerList").find("div").each(function (index) {//遍历客户列表里的所有客户，找哪个跑了
+                            if ($(this).attr("data-cid") == cid) {
+                                $(this).remove();       // 删除客户
+                                $("#messages").find("div").eq(index).remove();//删除客户进来时新建的对话框
+                            }
+                        });
+                        break;
+                    case "咨询":     // 有用户咨询消息
+                        // 获取内容，显示在咨询窗口 - 最好是高亮该用户id
+                        var x = "div[data-cid='" + cid + "']";//就是拼接个字符串 传变量cid
+
+                        var msg = "<div>[" + cid + "问]：" + data.msg + "</div>";
+                        if (!$("#customerList").find(x).hasClass("red")) { //有新消息来的时候对应的客户列表会变黄给提示，如果是你当前的客户给你新消息 列表颜色就不变
+                            $("#customerList").find(x).addClass("yel");
+                        }
+
+                        // 将消息显示在咨询窗口
+                        $("#messages").find(x).append(msg);//把发送消息的用户的信息放到对应的对话框里
+                        // 窗口自动向下滚动
+                        $("#messages").scrollTop($("#messages").prop("scrollHeight"));//滚动条自动滚动 老师写的 就这么回事 背出来就好
+                        break;
+                }
+            });
+            // 客服发送回答信息
+            $("#message").on("keyup",function(e){//就是判断input框里面有没有内容 没有内容就不允许发送，不允许的含义是指不允许按回车发送和鼠标点击发送，送个空的字符串出去很难看啊
+                if($("#message").val()!==""){//input框是否为空，如果不为空 则可以执行键盘13按下的虚拟事件，否则 不允许
+                    if (e.keyCode == 13) {  // 如果是按下的Enter键
+                        //模拟点击send按钮，触发上面的 Click 事件
+                        $("#send").trigger("click");
+                    }
+                    $("#send").attr("disabled", false);//input不为空 允许点击send发送
+                }else{
+                    $("#send").attr("disabled", true);//input为空 不允许点击发送
+                }
+            });
+            $("#send").on("click", function () {//send的点击事件
+                // 获取客服输入的咨询内容
+                var content = $("#message").val();//获取input框的内容 var一个变量 藏起来
+                // ......
+                // 敏感词过滤
+
+                // 构造要发送的信息的数据结构
+                var data = {
+                    type: "客服",//参数类型
+                    cid: $("#customerList").find("div").eq(n).attr("data-cid"),//把想要接收消息的客户的ID打包
+                    msg: content//把之前藏起来的input内容打包
+                };
+                clientSocket.send(data);//把打包好的数据丢到服务器
+                // 将咨询内容追加到界面上
+                $("#messages").find(".mes").eq(n).append("<div>" + content + "</div>");//把你和客户交流的消息 写在对应的对话框上
+                // 窗口自动向下滚动
+                $("#messages").find(".mes").eq(n).scrollTop($("#messages").find(".mes").eq(n).prop("scrollHeight"));//自动滚窗
+                $("#message").val(null);    // 清空输入框
+                $("#send").attr("disabled", true);//消息清空之后send按钮关闭 等有内容的时候再开启
+
+            });
+
+            function select() {
+                $("#customerList").find("div").each(function (index) {//每次有客户的任何请求进来的时候都遍历一遍客户的列表
+                    var _this = $(this);
+                    $(this).on("click", function () {//客户列表的点击事件
+                        _this.removeClass("yel").addClass("red").siblings().removeClass("red");//点击的那个客户名字变红，其他的默认
+                        $("#messages").find(".mes").eq(index).css("opacity", 1).siblings().css("opacity", 0);//把变红的客户的对应的对话框显示，其他的对话框隐藏起来
+                        n = index;//这很关键，把你点的客户的index传出去
+                    });
+                });
+
+            }
+
+        });
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <a href="/"><img src="images/jd.gif" width="100"/></a>
+</div>
+
+<div class="bg-info">
+    <div class="container">
+        <nav class="navbar navbar-default <!--navbar-fixed-top-->" role="navigation">
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <h3 class="title text-center">京东在线客服系统 - 客服界面</h3>
+    <div class="panel panel-info">
+        <div class="panel-heading">正在和客户通话</div>
+        <div class="panel-body">
+            <div class="row">
+                <!--在侧咨询客户列表-->
+                <div class="col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">在线客户列表</div>
+                        <div class="panel-body" id="customerList">
+                            <!--<div class="bg-primary customer">客户：张三</div>
+                            <div class="bg-info customer">客户：李四</div>
+                            <div class="bg-info customer">客户：王老五</div>-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--右侧聊天界面-->
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="messages"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11"><input type="text" id="message" class="form-control"/></div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" id="send" disabled>发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

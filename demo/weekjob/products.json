@@ -1,0 +1,5 @@
+[
+  {"name":"海信电视","price":3099,"imgsrc":"images/haixin.tv.jpg","detail":"images/haixin_03.jpg","s_pic":"images/small_haixin.jpg"},
+  {"name":"小米电视","price":3899,"imgsrc":"images/xiaomi.tv.jpg","detail":"images/xiaomi_03.jpg","s_pic":"images/small_xiaomi.jpg"},
+  {"name":"飞利浦电视","price":3299,"imgsrc":"images/philips.tv.jpg","detail":"images/philips_03.jpg","s_pic":"images/small_philips.jpg"}
+]

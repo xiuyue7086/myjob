@@ -1,0 +1,86 @@
+<ion-view>
+    <ion-header-bar class="bar-balanced item-button-right" style="border-bottom-width:0">
+        <div class="buttons">
+            <a ng-click="showPopup()" class="button light button-icon ion-ios-gear"></a>
+            <a class="button button-clear">
+                <i class="icon light ion-android-notifications-none"></i>
+            </a>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list card" style="margin: 0">
+            <div class="item balanced-bg" align="center">
+                <img ng-src="{{customer.imgsrc}}" width="60">
+                <br>
+                id:{{customer.number}}
+            </div>
+            <div style="border-bottom: 4px solid #cccccc">
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-android-folder-open assertive"></i>
+                    我的钱包
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-social-yen-outline assertive"></i>
+                    我的余额
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-ios-albums royal"></i>
+                    我的抵用券
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-card royal"></i>
+                    我的会员卡
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+            </div>
+            <div style="border-bottom: 4px solid #cccccc">
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-person-stalker calm"></i>
+                    好友去哪了
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-chatbox-working calm"></i>
+                    我的评价
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-ios-star energized"></i>
+                    我的收藏
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-university energized"></i>
+                    会员中心
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-briefcase energized"></i>
+                    积分商城
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+            </div>
+            <div>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-ios-telephone balanced"></i>
+                    好友去哪了
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+                </a>
+                <a class="item" href="javascript:;">
+                    <i class="icon ion-android-home balanced"></i>
+                    我的评价
+                    <i class="icon ion-chevron-right" style="position:absolute; right: 5px;"></i>
+
+                </a>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

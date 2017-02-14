@@ -1,0 +1,204 @@
+<ion-view>
+    <ion-side-menus>
+        <ion-side-menu-content>
+            <ion-header-bar class="bar-light item-input-inset" style="overflow: visible;">
+                <button class="light button button-icon icon-left ion-navicon-round" ng-click="toggleLeft()"></button>
+                <span class="title" style="font-weight: bold; color:#b10092; font-family: '楷体'">山寨唯品会</span>
+                <div class="buttons">
+            <span class="button" ui-sref="login" ng-if="!getUser().userId" style="color: #b10092;">
+                登陆
+            </span>
+                    <span class="button" ng-if="getUser().userId">{{getUser().userNk}}</span>
+                </div>
+
+            </ion-header-bar>
+            <ion-content>
+                <ion-slide-box does-continue="true" auto-play="true">
+                    <ion-slide>
+                        <img src="images/slide1.jpg" width="100%">
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="images/slide2.jpg" width="100%">
+                    </ion-slide>
+                    <ion-slide>
+                        <img src="images/slide3.jpg" width="100%">
+                    </ion-slide>
+                </ion-slide-box>
+                <div class="row">
+                    <a class="col">
+                        <img src="images/icon_02.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_03.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_04.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_05.jpg" width="100%">
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="col">
+                        <img src="images/icon_06.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_07.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_08.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/icon_09.jpg" width="100%">
+                    </a>
+                </div>
+                <h4 class="title" style="text-align: center">-新年聚会多 穿搭别出错-</h4>
+                <a>
+                    <img src="images/banner_02.jpg" width="100%">
+                </a>
+                <div class="row">
+                    <a class="col">
+                        <img src="images/item_03.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_04.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_05.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_06.jpg" width="100%">
+                    </a>
+                </div>
+                <a>
+                    <img src="images/banner_04.jpg" width="100%">
+                </a>
+                <div class="row">
+                    <a class="col">
+                        <img src="images/item_08.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_09.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_10.jpg" width="100%">
+                    </a>
+                    <a class="col">
+                        <img src="images/item_11.jpg" width="100%">
+                    </a>
+                </div>
+                <h4 class="title" style="text-align: center">-新特卖-</h4>
+                <p style="text-align: center; color: #CCCCCC;">每天早10点·晚8点上新</p>
+                <ion-refresher pulling-text="下拉刷新" pulling-icon="ion-loop" on-pulling="doRefersh()"></ion-refresher>
+
+                <div class="card" ng-repeat="item in items">
+                    <img ng-src="{{item.imgsrc}}" width="100%">
+                    <div style="color:red;display: inline-block">{{item.discount}}折起</div>
+                    &nbsp&nbsp&nbsp&nbsp
+                    <div style="display: inline-block">{{item.attr}}</div>
+                    <time style="color: #666666; float: right;">剩{{item.remain}}天</time>
+                </div>
+                <ion-infinite-scroll on-infinite="loadMore()" immediate-check="false"></ion-infinite-scroll>
+
+            </ion-content>
+            <div id="top" ng-click="top()">top</div>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" style="background-color: #444444;">
+            <div class="list">
+                <button class="item button-full item-icon-left dark-bg" style="color:white;">
+                    <i class="icon ion-home"></i>
+                    首页
+                </button>
+                <button class="item button-full item-icon-left dark-bg" style="color:white;">
+                    <i class="icon ion-bowtie"></i>
+                    女装
+                </button>
+                <button class="item button-full item-icon-left dark-bg" style="color:white;">
+                    <i class="icon ion-bag"></i>
+                    鞋包
+                </button>
+                <button class="item button-full item-icon-left dark-bg" style="color:white;">
+                    <i class="icon ion-man"></i>
+                    男士
+                </button>
+                <button class="item button-full item-icon-left dark-bg" style="color:white;">
+                    <i class="icon ion-android-bicycle"></i>
+                    户外运动
+                </button>
+            </div>
+            <div class="row" style="padding:0;margin-top: -20px;">
+                <button class="col button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-woman"></i>
+                    <br>
+                    母婴
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-ios-flask"></i>
+                    <br>
+                    美妆
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-ios-home"></i>
+                    <br>
+                    家居家纺
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-funnel"></i>
+                    <br>
+                    数码家电
+                </button>
+            </div>
+            <div class="row" style="background-color: #444444;padding:0;">
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-ios-time"></i>
+                    <br>
+                    手表配饰
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-earth"></i><br>
+                    唯品国际
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-social-chrome-outline"></i>
+                    <br>
+                    唯风尚
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-social-euro"></i>
+                    <br>
+                    艾利奢
+                </button>
+            </div>
+            <div class="row" style="background-color: #444444;padding:0;border-bottom: 1px solid white">
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-coffee"></i>
+                    <br>
+                    唯品生活
+                </button>
+                <button class="col  button"
+                        style="color:white;background-color: #444444; padding: 0; border: 0;height: 85px;">
+                    <i class="icon ion-social-usd-outline"></i>
+                    <br>
+                    唯品金融
+                </button>
+                <div class="col  icon-top" style="background-color: #444444; padding: 0; border: 0;height: 85px;">
+                </div>
+                <div class="col  icon-top" style="background-color: #444444; padding: 0; border: 0;height: 85px;">
+                </div>
+            </div>
+            <div class="row" style="padding: 0; text-align: center;">
+                <button class="col-50" style="margin-top: 15px;padding:0;border: 0; border-right:1px solid white;background-color: #444444; color: white;">个人中心</button>
+                <button class="col-50" style="margin-top: 15px;padding:0;border: 0;background-color: #444444; color: white;">品牌收藏</button>
+            </div>
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>
